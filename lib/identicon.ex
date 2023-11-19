@@ -66,11 +66,17 @@ defmodule Identicon do
   end
 
   def save(image, filename) do
-	case File.dir?("images") do
-		:true ->
-			Path.join("images", "#{filename}.png")
-			|> File.write(image)
-		_ -> "Path image doesnot exist, craete fiirst!"
-	end
+	  folder_name = "images"
+    case File.dir?(folder_name) do
+      false -> File.mkdir!(folder_name)
+      _ -> :ok 
+    end
+	
+    Path.join(folder_name, "#{filename}.png")
+    |> File.write(image)
+    |> handle_save_result
   end
+
+  defp handle_save_result(:ok), do: IO.puts("Image saved succesfully")
+  defp handle_save_result({:error, reason}), do: IO.inspect(reason, label: "Error saving file")
 end 

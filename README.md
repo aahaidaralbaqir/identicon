@@ -7,6 +7,22 @@
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 by adding `identicon` to your list of dependencies in `mix.exs`:
 
+### EGD - Erlang Graphical Drawer
+`:egd` is no longer available in Elixir OTP, so to get around this
+mix.exs:
+
+```
+{:egd, github: "erlang/egd"}
+```
+
+To install dependencies:
+
+```
+mix deps.clean --all
+mix deps.get
+mix deps.compile
+```
+
 ```elixir
 def deps do
   [

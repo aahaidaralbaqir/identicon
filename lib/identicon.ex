@@ -66,6 +66,7 @@ defmodule Identicon do
   end
 
   def save(image, filename) do
-    File.write("#{filename}.png", image)
+	path = Path.join("images", "#{filename}.png")
+    File.write(path, image)
   end
 end 

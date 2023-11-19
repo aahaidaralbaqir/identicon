@@ -6,6 +6,7 @@ defmodule Identicon do
 	  |> build_grid
     |> filter_odd_squares
     |> create_pixel
+    |> draw
   end
 
   def hash(input) do
@@ -50,5 +51,15 @@ defmodule Identicon do
       {top_left, bottom_right}
     end
   %Identicon.Image{image | pixel: pixel}
+  end
+  
+  def draw(%Identicon.Image{color: color, pixel: pixel}) do
+    image = :egd.create(250, 250)
+    fill = :egd.color(color)
+
+    Enum.each pixel, fn({start, stop}) -> 
+      :egd.fillRectangle(image, start, stop, fill)
+    end
+    :egd.render(image)
   end
 end 

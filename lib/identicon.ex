@@ -66,7 +66,11 @@ defmodule Identicon do
   end
 
   def save(image, filename) do
-	path = Path.join("images", "#{filename}.png")
-    File.write(path, image)
+	case File.dir?("images") do
+		:true ->
+			Path.join("images", "#{filename}.png")
+			|> File.write(image)
+		_ -> "Path image doesnot exist, craete fiirst!"
+	end
   end
 end 
